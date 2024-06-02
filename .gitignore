@@ -1,2 +1,3 @@
-terraform.tfstate
-terraform.tfstate.backup
+/myapp/devops-iac-aws/terraform-iac/terraform.tfstate
+/myapp/devops-iac-aws/terraform-iac/terraform.tfstate.backup
+/myapp/devops-iac-aws/terraform-iac/potgress.sh
