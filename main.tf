@@ -303,18 +303,6 @@ resource "aws_instance" "sonar-server" {
     sudo update-alternatives --config java
     java -version
     sudo apt update
-    wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
-    sudo apt install postgresql postgresql-contrib -y
-    sudo systemctl enable postgresql.service
-    sudo systemctl start postgresql.service
-    echo "postgres:admin123" | sudo chpasswd
-    sudo -i -u postgres createuser sonar
-    sudo -i -u postgres psql -c "ALTER USER sonar WITH ENCRYPTED PASSWORD 'admin123';"
-    sudo -i -u postgres psql -c "CREATE DATABASE sonarqube OWNER sonar;"
-    sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;"
-    sudo systemctl restart postgresql
-    sudo netstat -tulpena | grep postgres
     sudo mkdir -p /sonarqube/
     cd /sonarqube/
     sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
